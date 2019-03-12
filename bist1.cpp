@@ -63,6 +63,7 @@ class bist{
 		
 		void display(){
 			display2(root);
+			cout<<endl;
 		}
 		
 		node display_Fancy(int spaces){
@@ -73,11 +74,20 @@ class bist{
 			//display left
 			//
 		}
-		node* search(int value){
-			if (root->data==value){
-				return root;
+		node* search_helper(node* curr,int value){
+			if (curr==NULL||curr->data==value){
+				return curr;
 			}
-			else if()
+			else if(curr->data>value){
+				return search_helper(curr->left,value);
+			}
+			else{
+				return search_helper(curr->right,value);
+			}
+		}
+		
+		node* search(int value){
+			search_helper(root,value);
 		}
 		//next class- friday
 		//height();
@@ -92,4 +102,11 @@ int main(){
 	b1.insert(100);
 	b1.insert(7);
 	b1.display();
+	if(b1.search(5)!=NULL){
+		cout<<"found\n";
+	}
+	else{
+		cout<<"Invalid input\n";
+	}
+	return 0;
 }
